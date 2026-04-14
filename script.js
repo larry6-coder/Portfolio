@@ -7,36 +7,35 @@ const roles = [
 
 let i = 0;
 let j = 0;
-let currentText = "";
-let isDeleting = false;
+let deleting = false;
 
-function typeEffect() {
-  currentText = roles[i];
+function typeEffect(){
+  let current = roles[i];
 
-  if (isDeleting) {
+  if(deleting){
     j--;
   } else {
     j++;
   }
 
-  document.getElementById("typing").textContent = currentText.substring(0, j);
+  document.getElementById("typing").textContent = current.substring(0,j);
 
-  if (!isDeleting && j === currentText.length) {
-    isDeleting = true;
-    setTimeout(typeEffect, 1000);
+  if(!deleting && j === current.length){
+    deleting = true;
+    setTimeout(typeEffect,1000);
     return;
   }
 
-  if (isDeleting && j === 0) {
-    isDeleting = false;
-    i = (i + 1) % roles.length;
+  if(deleting && j === 0){
+    deleting = false;
+    i = (i+1)%roles.length;
   }
 
-  setTimeout(typeEffect, isDeleting ? 50 : 100);
+  setTimeout(typeEffect, deleting ? 50 : 100);
 }
 
 typeEffect();
 
 function scrollToContact(){
-  document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("contact").scrollIntoView({behavior:"smooth"});
 }
